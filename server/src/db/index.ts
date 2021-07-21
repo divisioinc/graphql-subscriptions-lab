@@ -1,7 +1,10 @@
 import { Sequelize } from "sequelize";
 
-import User from "./models/User";
 import config from "../config";
+
+import User from "./models/User";
+import Post from "./models/Post";
+import Comment from "./models/Comment";
 
 const db = new Sequelize(`${config.db.uri}`, {
   logging: false,
@@ -12,6 +15,8 @@ const db = new Sequelize(`${config.db.uri}`, {
 });
 
 const UserModel = User(db);
+const PostModel = Post(db);
+const CommentModel = Comment(db);
 
 const syncDatabase = () => {
   db.sync()
@@ -21,4 +26,4 @@ const syncDatabase = () => {
     );
 };
 
-export { syncDatabase, UserModel };
+export { syncDatabase, UserModel, PostModel, CommentModel };
